@@ -1,3 +1,7 @@
+import "regenerator-runtime/runtime";
+import "core-js/stable"; 
+
+
 export const getLongLangtitude = async (pointValue) => {
     try {
         const response = await fetch(`https://geocode-maps.yandex.ru/1.x/?apikey=93dcdcff-e757-4a6d-876e-71c4e2993af&format=json&geocode=${pointValue}`);
