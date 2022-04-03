@@ -34,7 +34,7 @@ export const MyMap = () => {
 
 
   return (
-    <YMaps query={{ apikey: '93dcdcff-e757-4a6d-876e-71c4ee2993af' }}>
+    <YMaps query={{ apikey: '6bdc2431-37e2-482e-9a1e-053e33ce83fc' }}>
 
       <Map
         className="map"

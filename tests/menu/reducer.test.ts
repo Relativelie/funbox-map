@@ -1,6 +1,6 @@
-import { fetchLongLatitude, removePoint } from "../../store/actions/pointsActions";
-import { pointsReducer } from "../../store/reducers/pointsReducer";
-import { PointsState } from "../../types/pointsTypes"
+import { removePoint } from "../../src/store/actions/pointsActions";
+import { pointsReducer } from "../../src/store/reducers/pointsReducer";
+import { PointsState } from "../../src/types/pointsTypes"
 
 
 test("", () => {
@@ -11,7 +11,6 @@ test("", () => {
             [[55.86692, 49.234451], "Россия, Республика Татарстан, Казань, Советский район, посёлок Дербышки, улица Мира, 1"]
         ],
         routes: [[55.824597, 49.121416], [55.867223, 49.084747], [55.86692, 49.234451]],
-        indexOfPoint: 0,
         wrongPointError: "",
         isCorrectPoint: null,
         loading: false,

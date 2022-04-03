@@ -60,8 +60,7 @@ const config: Configuration = {
         static: path.join(__dirname, "build"),
         historyApiFallback: true,
         port: 4001,
-        open: true,
-        hot: true
+        open: true
     },
 };
 
