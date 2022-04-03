@@ -1,20 +1,24 @@
-import React, { KeyboardEvent, useEffect, useRef } from "react";
+import { KeyboardEvent, useEffect, useRef } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-
 import { ymaps } from "../../hooks/ymapsConstant";
 
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-import { Loading } from "../loading/Loading";
-import { AddressInput } from "./AddressInput/AddressInput";
-import { Directions } from "./Directions/Directions";
+import { getLongLangtitude } from "../../requests/getLongLangtitude";
+
+import { Loading } from "./loadingSpinner/Loading";
+import { AddressInput } from "./inputField/AddressInput";
+import { Directions } from "./directionsList/Directions";
+
+import "./Menu.scss";
+
 
 
 export const Menu = () => {
 
     const myRef = useRef<HTMLInputElement>(null);
-    const { checkAddingPoint, fetchLongLatitude, pointDragging } = useActions();
+    const { checkAddingPoint, fetchLongLatitudeSuccess, pointDragging, fetchLongLatitudeBegin, fetchLongLatitudeFatal, fetchLongLatitudeError } = useActions();
     const { points, isCorrectPoint, loading } = useTypedSelector(state => state.points);
 
 
@@ -37,12 +41,24 @@ export const Menu = () => {
                 const currentCase = result.properties.get('metaDataProperty.GeocoderMetaData.precision');
                 checkAddingPoint(currentCase);
             }
-            else checkAddingPoint("other")
+            else checkAddingPoint("other");
         }
     };
 
-    const addPointToDirections = () => {
-        if (myRef.current !== null) fetchLongLatitude(myRef.current.value);
+    const addPointToDirections = async() => {
+        if (myRef.current !== null) {
+            fetchLongLatitudeBegin();
+            const result = await getLongLangtitude(myRef.current.value);
+            if (result === "fatal") {
+                fetchLongLatitudeFatal();
+            }
+            else if(result[0] === "error") {
+                fetchLongLatitudeError(result[1])
+            }
+            else {
+                fetchLongLatitudeSuccess(result)
+            }
+        }
     };
 
     const checkLoadingProcess = () => {
@@ -55,10 +71,9 @@ export const Menu = () => {
 
     const handleOnDragEnd = (result: any) => {
         if (!result.destination) return;
-        const fromIndex = result.source.index
+        const fromIndex = result.source.index;
         const toIndex = result.destination.index;
-        pointDragging(fromIndex, toIndex)
-
+        pointDragging(fromIndex, toIndex);
     }
 
 
@@ -68,17 +83,16 @@ export const Menu = () => {
                 <AddressInput refValue={myRef} pointVerify={pointVerify} />
                 {checkLoadingProcess()}
             </div>
-            <DragDropContext onDragEnd={(e: any) => handleOnDragEnd(e)}>
 
+            <DragDropContext onDragEnd={(e: any) => handleOnDragEnd(e)}>
                 <Droppable droppableId="group" type="group">
                     {(provided: any) => (
                         <div {...provided.droppableProps} ref={provided.innerRef}>
-                            {points.map((element: any, index: number) => (
+                            {points.map((element: [number[], string], index: number) => (
                                 <Directions key={`point-${index}`} index={index} element={element} />
                             ))}
                             {provided.placeholder}
                         </div>
-
                     )}
                 </Droppable>
             </DragDropContext>

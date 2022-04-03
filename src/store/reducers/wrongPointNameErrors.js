@@ -1,4 +1,4 @@
-export const pointErrorTexts = {
+export const wrongPointNameErrors = {
     numberNearRange: "Неточный адрес, требуется уточнение, уточните номер дома",
     street: "Неполный адрес, требуется уточнение, уточните номер дома",
     other: "Неточный адрес, требуется уточнение, уточните адрес"

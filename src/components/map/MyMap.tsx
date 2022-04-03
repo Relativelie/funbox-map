@@ -1,26 +1,26 @@
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { YMaps, Map, Placemark, Polyline } from "react-yandex-maps";
+
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+
 import { getLongLangtitude } from "../../requests/getLongLangtitude";
+
+import "./myMap.scss";
 
 
 export const MyMap = () => {
 
-  const { points, routes, isFetchFail } = useTypedSelector(state => state.points);
-  const { changePointCoordinates } = useActions()
+  const { points, routes, isFetchFatal } = useTypedSelector(state => state.points);
+  const { changePointCoordinates } = useActions();
   const [myCenter, setMyCenter] = useState({ center: [55.75, 37.57], zoom: 9 });
   const mapRef: any = useRef(null);
 
 
-
-
   useEffect(() => {
-    if (points.length !== 0 && !isFetchFail) {
+    if (points.length !== 0 && !isFetchFatal) {
       setMyCenter({ center: points[0][0], zoom: 13 });
-      console.log("points", points)
-      console.log("routes", routes)
     }
   }, [points])
 
@@ -29,8 +29,8 @@ export const MyMap = () => {
   const changeCoordinates = async (e: any, key: number) => {
     const coordinates = e.get('target').geometry.getCoordinates();
     const destinationName = await getLongLangtitude([coordinates[1], coordinates[0]]);
-    changePointCoordinates(key, coordinates, destinationName[1])
-  }
+    changePointCoordinates(key, coordinates, destinationName[1]);
+  };
 
 
   return (
@@ -41,7 +41,7 @@ export const MyMap = () => {
         state={myCenter}
         instanceRef={(ref) => { if (ref) mapRef.current = ref }}
       >
-        {points.map((elem:any, index:any) => (
+        {points.map((elem: [number[], string], index: number) => (
           <Placemark
             className="placemark"
             onDragEnd={(e: any) => changeCoordinates(e, index)}
@@ -63,7 +63,6 @@ export const MyMap = () => {
             strokeOpacity: 0.7,
           }}
         />
-
       </Map>
 
     </YMaps>

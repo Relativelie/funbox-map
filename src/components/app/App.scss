@@ -1,0 +1,19 @@
+@import "../../templates.scss";
+
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.App {
+    display: grid;
+    grid-template-areas: "map map menu";
+    grid-template-columns: repeat(2, 1fr) 30%;
+    grid-template-rows: 100vh;
+}

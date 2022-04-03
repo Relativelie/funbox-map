@@ -1,8 +1,9 @@
-import React, { FC, FormEvent, useEffect, KeyboardEvent } from "react"
+import { FC, FormEvent, useEffect, KeyboardEvent } from "react"
 import { ymaps } from "../../../hooks/ymapsConstant";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { menuTexts } from "../../../texts/menutexts"
+
+import "./AddressInput.scss"
 
 
 interface RefObject<T> {
@@ -11,8 +12,7 @@ interface RefObject<T> {
 
 interface Props {
     refValue: RefObject<HTMLInputElement>,
-    pointVerify: (e:KeyboardEvent<HTMLInputElement>) => void;
-    
+    pointVerify: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
 
@@ -37,14 +37,13 @@ export const AddressInput: FC<Props> = ({ refValue, pointVerify }) => {
             <input
                 id="suggest"
                 className={`menuInput ${isCorrectPoint && "inputError"}`}
-                placeholder={menuTexts.inputPointPlaceholder}
+                placeholder="Поиск на GuRepio Картах"
                 ref={refValue}
                 onKeyUp={(event) => pointVerify(event)}
             />
-            <div className="pointErrorText">
+            <div className="inputErrorText">
                 <p>{wrongPointError}</p>
             </div>
-
         </form>
     )
 }

@@ -2,10 +2,9 @@ export interface PointsState {
     points: Array<[Array<number>, string]>,
     routes: Array<Array<number>>,
     wrongPointError: string,
-    indexOfPoint: number,
     isCorrectPoint: boolean | null,
     loading: boolean,
-    isFetchFail: boolean,
+    isFetchFatal: boolean,
     isFetchError: boolean,
     errorCode: number | null
 }
@@ -16,7 +15,6 @@ export enum PointsActionTypes {
     FETCH_LONG_LATITUDE_SUCCESS = "FETCH_LONG_LATITUDE_SUCCESS",
     FETCH_LONG_LATITUDE_FATAL = "FETCH_LONG_LATITUDE_FATAL",
     FETCH_LONG_LATITUDE_ERROR = "FETCH_LONG_LATITUDE_ERROR",
-    FETCH_LONG_LATITUDE = "FETCH_LONG_LATITUDE",
     REMOVE_POINT = "REMOVE_POINT",
     CHANGE_POINT_COORDINATES = "CHANGE_POINT_COORDINATES",
     DRAG_DROP = "DRAG_DROP"
@@ -32,7 +30,8 @@ interface fetchLongLatitudeBegin {
 }
 
 interface fetchLongLatitudeSuccess {
-    type: PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS
+    type: PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS,
+    longLatitudeValue: [number[], string]
 }
 
 interface fetchLongLatitudeFatal {
@@ -42,11 +41,6 @@ interface fetchLongLatitudeFatal {
 interface fetchLongLatitudeError {
     type: PointsActionTypes.FETCH_LONG_LATITUDE_ERROR,
     errorCode: number
-}
-
-interface fetchLongLatitude {
-    type: PointsActionTypes.FETCH_LONG_LATITUDE,
-    longLatitudeValue: any
 }
 
 interface removePoint {
@@ -73,7 +67,6 @@ export type PointsAction =
     | fetchLongLatitudeSuccess
     | fetchLongLatitudeFatal
     | fetchLongLatitudeError
-    | fetchLongLatitude
     | removePoint
     | changePointCoordinates
     | pointDragging

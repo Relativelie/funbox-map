@@ -1,0 +1,15 @@
+@import "../../templates";
+
+
+.errorContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(0deg, rgba(145,14,190,0.8954175420168067) 0%, rgba(114,39,222,0.9010197829131653) 46%, rgba(97,51,255,0.8001794467787114) 100%);
+
+    & h2 {
+        font-family: $fontFamily;
+        color: rgb(255, 255, 255)
+    }
+}

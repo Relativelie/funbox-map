@@ -1,15 +1,14 @@
-import { pointErrorTexts } from "../../texts/pointErrorTexts";
+import { wrongPointNameErrors } from "./wrongPointNameErrors";
 import { PointsState, PointsAction, PointsActionTypes } from "../../types/pointsTypes";
 
 
 const initialState: PointsState = {
     points: [],
     routes: [],
-    indexOfPoint: 0,
     wrongPointError: "",
     isCorrectPoint: null,
     loading: false,
-    isFetchFail: false,
+    isFetchFatal: false,
     isFetchError: false,
     errorCode: null
 }
@@ -28,14 +27,14 @@ export const pointsReducer = (state = initialState, action: PointsAction): Point
             else {
                 let errorText: string;
                 if (["number", "near", "range"].some((el) => el === action.checkingResult)) {
-                    errorText = pointErrorTexts.numberNearRange
+                    errorText = wrongPointNameErrors.numberNearRange
                 }
                 else if (action.checkingResult === "street") {
-                    errorText = pointErrorTexts.street
+                    errorText = wrongPointNameErrors.street
                 }
 
                 else if (action.checkingResult === "other") {
-                    errorText = pointErrorTexts.other
+                    errorText = wrongPointNameErrors.other
                 }
                 else {
                     errorText = ""
@@ -57,7 +56,7 @@ export const pointsReducer = (state = initialState, action: PointsAction): Point
             return {
                 ...state,
                 loading: false,
-                isFetchFail: true
+                isFetchFatal: true
             }
 
         case PointsActionTypes.FETCH_LONG_LATITUDE_ERROR:
@@ -69,18 +68,11 @@ export const pointsReducer = (state = initialState, action: PointsAction): Point
             }
 
         case PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS:
-
             return {
                 ...state,
                 loading: false,
                 isCorrectPoint: false,
-                wrongPointError: ""
-            }
-
-        case PointsActionTypes.FETCH_LONG_LATITUDE:
-            console.log(action.longLatitudeValue)
-            return {
-                ...state,
+                wrongPointError: "",
                 points: [
                     ...state.points,
                     action.longLatitudeValue,
@@ -88,11 +80,9 @@ export const pointsReducer = (state = initialState, action: PointsAction): Point
                 routes: [
                     ...state.routes,
                     action.longLatitudeValue[0]
-                ],
-
-                indexOfPoint: state.indexOfPoint + 1,
-                loading: false
+                ]
             }
+
 
         case PointsActionTypes.REMOVE_POINT:
             const pointsCopy = [...state.points];
@@ -130,6 +120,7 @@ export const pointsReducer = (state = initialState, action: PointsAction): Point
                 points: allPoints,
                 routes: allRoutes
             }
+
         default:
             return state
 

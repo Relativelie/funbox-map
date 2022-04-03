@@ -3,10 +3,12 @@ import { Draggable } from "react-beautiful-dnd";
 
 import { useActions } from "../../../hooks/useActions";
 
+import "./Directions.scss"
+
 
 interface Props {
     index: number,
-    element: Array<[number[], string]>
+    element: [number[], string]
 }
 
 
@@ -16,12 +18,10 @@ export const Directions: FC<Props> = ({ element, index }) => {
     const removeDirection = (e: MouseEvent<HTMLButtonElement>): void => {
         const { key } = (e.target as HTMLButtonElement).dataset;
         if (key !== undefined) removePoint(parseInt(key))
-
     };
 
 
     return (
-
         <Draggable draggableId={`point-${index}`} index={index}>
             {(provided) => (
                 <div className="direction" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>

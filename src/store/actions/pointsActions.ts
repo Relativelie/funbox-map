@@ -1,6 +1,4 @@
 import { PointsAction, PointsActionTypes } from "../../types/pointsTypes";
-import { Dispatch } from "react";
-import { getLongLangtitude } from "../../requests/getLongLangtitude";
 
 
 export const checkAddingPoint = (e: string): PointsAction => ({
@@ -12,8 +10,9 @@ export const fetchLongLatitudeBegin = (): PointsAction => ({
     type: PointsActionTypes.FETCH_LONG_LATITUDE_BEGIN
 });
 
-export const fetchLongLatitudeSuccess = (): PointsAction => ({
-    type: PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS
+export const fetchLongLatitudeSuccess = (result: any): PointsAction => ({
+    type: PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS,
+    longLatitudeValue: result
 });
 
 export const fetchLongLatitudeFatal = (): PointsAction => ({
@@ -25,41 +24,20 @@ export const fetchLongLatitudeError = (errorCode: number): PointsAction => ({
     errorCode: errorCode
 });
 
-export const fetchLongLatitude = (pointValue: string) => {
-    return async (dispatch: Dispatch<PointsAction>) => {
-        dispatch(fetchLongLatitudeBegin());
-        const result = await getLongLangtitude(pointValue);
-
-        if (result === "fatal") {
-            dispatch(fetchLongLatitudeFatal());
-        }
-        else if(result[0] === "error") {
-            dispatch(fetchLongLatitudeError(result[1]))
-        }
-        else {
-            dispatch(fetchLongLatitudeSuccess());
-            dispatch({
-                type: PointsActionTypes.FETCH_LONG_LATITUDE,
-                longLatitudeValue: result
-            })
-        }
-    };
-};
-
-export const removePoint = (pointKey: number) => ({
+export const removePoint = (pointKey: number): PointsAction => ({
     type: PointsActionTypes.REMOVE_POINT,
-    indexToBeRemoved: pointKey 
+    indexToBeRemoved: pointKey
 });
 
-export const pointDragging = (from: number, to: number) => ({
+export const pointDragging = (from: number, to: number): PointsAction => ({
     type: PointsActionTypes.DRAG_DROP,
     fromIndex: from,
     toIndex: to
-})
+});
 
-export const changePointCoordinates = (pointKey: number, coordinatesValue: Array<number>, destinationName: string) => ({
+export const changePointCoordinates = (pointKey: number, coordinatesValue: Array<number>, destinationName: string): PointsAction => ({
     type: PointsActionTypes.CHANGE_POINT_COORDINATES,
-    key: pointKey, 
+    key: pointKey,
     coordinates: coordinatesValue,
     destinationName: destinationName
 });
