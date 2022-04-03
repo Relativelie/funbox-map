@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { YMaps, Map, Placemark, Polyline } from "react-yandex-maps";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";

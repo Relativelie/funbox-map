@@ -1,4 +1,4 @@
-import { KeyboardEvent, useEffect, useRef } from "react";
+import React, { KeyboardEvent, useEffect, useRef } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 import { ymaps } from "../../hooks/ymapsConstant";

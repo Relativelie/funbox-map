@@ -10,11 +10,12 @@ import './styles/scss/style.scss'
 
 
 const App: FC = () => {
-  {/* <Provider store={store}> */ }
+
+  
   return (
     <Provider store={store}>
       <div className="App">
-        {/* <MyMap /> */}
+        <MyMap />
         <Menu />
       </div>
     </Provider>

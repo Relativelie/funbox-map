@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect, KeyboardEvent } from "react"
+import React, { FC, FormEvent, useEffect, KeyboardEvent } from "react"
 import { ymaps } from "../../../hooks/ymapsConstant";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
