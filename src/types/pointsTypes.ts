@@ -50,7 +50,7 @@ interface removePoint {
 
 interface changePointCoordinates {
     type: PointsActionTypes.CHANGE_POINT_COORDINATES,
-    key: number,
+    index: number,
     coordinates: Array<number>,
     destinationName: string
 }

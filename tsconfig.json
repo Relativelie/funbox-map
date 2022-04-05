@@ -12,7 +12,29 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["react/next", "react-dom/next"]
+    "types": ["react/next", "react-dom/next", "jest"],
   },
   "include": ["src", "tests"]
 }
+
+// {
+//   "compilerOptions": {
+//     "target": "es2017",
+//     "types": ["node", "jest"],
+//     "allowJs": true,
+//     "skipLibCheck": true,
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "strict": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "module": "commonjs",
+//     "moduleResolution": "node",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "baseUrl": ".",
+//     "noFallthroughCasesInSwitch": true,
+//     "outDir": "./dist"
+//   },
+//   "compileOnSave": true,
+//   "include": ["."]
+// }

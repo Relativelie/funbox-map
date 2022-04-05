@@ -21,7 +21,6 @@ export const Menu = () => {
     const { checkAddingPoint, fetchLongLatitudeSuccess, pointDragging, fetchLongLatitudeBegin, fetchLongLatitudeFatal, fetchLongLatitudeError } = useActions();
     const { points, isCorrectPoint, loading } = useTypedSelector(state => state.points);
 
-
     useEffect(() => {
         if (isCorrectPoint) {
             addPointToDirections();
