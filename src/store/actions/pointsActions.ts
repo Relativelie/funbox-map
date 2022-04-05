@@ -37,7 +37,7 @@ export const pointDragging = (from: number, to: number): PointsAction => ({
 
 export const changePointCoordinates = (pointKey: number, coordinatesValue: Array<number>, destinationName: string): PointsAction => ({
     type: PointsActionTypes.CHANGE_POINT_COORDINATES,
-    key: pointKey,
+    index: pointKey,
     coordinates: coordinatesValue,
     destinationName: destinationName
 });

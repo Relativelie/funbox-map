@@ -68,6 +68,7 @@ export const pointsReducer = (state = initialState, action: PointsAction): Point
             }
 
         case PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS:
+            console.log(action.longLatitudeValue)
             return {
                 ...state,
                 loading: false,
@@ -98,9 +99,11 @@ export const pointsReducer = (state = initialState, action: PointsAction): Point
         case PointsActionTypes.CHANGE_POINT_COORDINATES:
 
             const pointsC = [...state.points];
-            pointsC.splice(action.key, 1, [action.coordinates, action.destinationName]);
             const routesC = [...state.routes];
-            routesC.splice(action.key, 1, action.coordinates)
+            if (action.index < pointsC.length && action.index >= 0 && pointsC.length != 0) {
+                pointsC.splice(action.index, 1, [action.coordinates, action.destinationName]);
+                routesC.splice(action.index, 1, action.coordinates)
+            }
 
             return {
                 ...state,

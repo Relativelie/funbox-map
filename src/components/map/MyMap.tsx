@@ -29,6 +29,7 @@ export const MyMap = () => {
   const changeCoordinates = async (e: any, key: number) => {
     const coordinates = e.get('target').geometry.getCoordinates();
     const destinationName = await getLongLangtitude([coordinates[1], coordinates[0]]);
+    console.log(key, coordinates, destinationName[1])
     changePointCoordinates(key, coordinates, destinationName[1]);
   };
 
