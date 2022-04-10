@@ -25,11 +25,9 @@ export const MyMap = () => {
   }, [points])
 
 
-
   const changeCoordinates = async (e: any, key: number) => {
     const coordinates = e.get('target').geometry.getCoordinates();
     const destinationName = await getLongLangtitude([coordinates[1], coordinates[0]]);
-    console.log(key, coordinates, destinationName[1])
     changePointCoordinates(key, coordinates, destinationName[1]);
   };
 
@@ -52,7 +50,11 @@ export const MyMap = () => {
               draggable: true
             }}
             key={`placemark-${index}`}
-            geometry={elem[0]} />
+            geometry={elem[0]}
+            modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
+            properties={{
+              balloonContent: elem[1],
+            }} />
         ))}
 
         <Polyline
