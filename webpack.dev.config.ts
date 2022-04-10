@@ -2,6 +2,7 @@ import path from "path";
 import { Configuration as WebpackConfiguration, HotModuleReplacementPlugin, ProvidePlugin } from "webpack";
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import DotenvWebpackPlugin from "dotenv-webpack";
 
 interface Configuration extends WebpackConfiguration {
     devServer?: WebpackDevServerConfiguration;
@@ -54,6 +55,9 @@ const config: Configuration = {
         new ProvidePlugin({
             "React": "react",
         }),
+        new DotenvWebpackPlugin({
+            defaults: true
+        })
     ],
     devtool: "inline-source-map",
     devServer: {

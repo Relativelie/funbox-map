@@ -18,7 +18,7 @@ describe("points action creators", () => {
     });
     
     test("action to add correct point into destination menu", () => {
-        const longLatitudeValue = [[55.821805, 49.149704], 'Россия, Республика Татарстан, Казань, улица Четаева, 4'];
+        const longLatitudeValue: [number[], string] = [[55.821805, 49.149704], 'Россия, Республика Татарстан, Казань, улица Четаева, 4'];
         expect(fetchLongLatitudeSuccess(longLatitudeValue)).toEqual({
             type: PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS,
             longLatitudeValue

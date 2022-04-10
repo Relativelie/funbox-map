@@ -34,8 +34,7 @@ export const MyMap = () => {
 
 
   return (
-    <YMaps query={{ apikey: '6bdc2431-37e2-482e-9a1e-053e33ce83fc' }}>
-
+    <YMaps query={{ apikey: process.env.REACT_APP_API_KEY }}>
       <Map
         className="map"
         state={myCenter}
