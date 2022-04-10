@@ -1,6 +1,70 @@
-import { fetchLongLatitudeBegin, fetchLongLatitudeError, fetchLongLatitudeFatal, fetchLongLatitudeSuccess, removePoint } from "../../src/store/actions/pointsActions";
+import { fetchLongLatitudeBegin,
+    fetchLongLatitudeError,
+    fetchLongLatitudeFatal,
+    fetchLongLatitudeSuccess } from "../../src/store/actions/pointsActions";
 import { pointsReducer } from "../../src/store/reducers/pointsReducer";
-import { stateFullPointsRouts, forAddPoints, forAddPointsEmptyPoints, stateEmptyPointsRouts } from "./stateVariables";
+import { PointsState } from "../../src/types/pointsTypes";
+
+
+let stateFullPointsRouts: PointsState;
+let forAddPoints: PointsState;
+let forAddPointsEmptyPoints: PointsState;
+let stateEmptyPointsRouts: PointsState;
+
+beforeEach(() => {
+    stateFullPointsRouts = {
+        points: [
+            [[55.824597, 49.121416], "Россия, Республика Татарстан, Казань, улица Четаева, 35"],
+            [[55.867223, 49.084747], "Россия, Республика Татарстан, Казань, Авиастроительный район, улица Чапаева, 24"],
+            [[55.86692, 49.234451], "Россия, Республика Татарстан, Казань, Советский район, посёлок Дербышки, улица Мира, 1"]
+        ],
+        routes: [[55.824597, 49.121416], [55.867223, 49.084747], [55.86692, 49.234451]],
+        wrongPointError: "",
+        isCorrectPoint: false,
+        loading: false,
+        isFetchFatal: false,
+        isFetchError: false,
+        errorCode: null
+    };
+
+    forAddPoints = {
+        points: [
+            [[55.824597, 49.121416], "Россия, Республика Татарстан, Казань, улица Четаева, 35"],
+            [[55.867223, 49.084747], "Россия, Республика Татарстан, Казань, Авиастроительный район, улица Чапаева, 24"],
+            [[55.86692, 49.234451], "Россия, Республика Татарстан, Казань, Советский район, посёлок Дербышки, улица Мира, 1"]
+        ],
+        routes: [[55.824597, 49.121416], [55.867223, 49.084747], [55.86692, 49.234451]],
+        wrongPointError: "",
+        isCorrectPoint: false,
+        loading: true,
+        isFetchFatal: false,
+        isFetchError: false,
+        errorCode: null
+    };
+
+    forAddPointsEmptyPoints = {
+        points: [],
+        routes: [],
+        wrongPointError: "",
+        isCorrectPoint: false,
+        loading: true,
+        isFetchFatal: true,
+        isFetchError: true,
+        errorCode: null
+    };
+
+    stateEmptyPointsRouts = {
+        points: [],
+        routes: [],
+        wrongPointError: "",
+        isCorrectPoint: false,
+        loading: false,
+        isFetchFatal: false,
+        isFetchError: false,
+        errorCode: null
+    };
+})
+
 
 
 describe("points reducer - fetch longitude and latitude", () => {

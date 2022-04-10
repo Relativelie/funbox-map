@@ -68,7 +68,6 @@ export const pointsReducer = (state = initialState, action: PointsAction): Point
             }
 
         case PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS:
-            console.log(action.longLatitudeValue)
             return {
                 ...state,
                 loading: false,
