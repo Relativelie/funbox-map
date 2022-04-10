@@ -10,9 +10,10 @@
         width: 80%;
 
         & p {
+            text-shadow: 0 1px 5px black;
+            font-size: clamp(10px, 2vw, 18px);
             font-family: $fontFamily;
             color: rgb(255, 255, 255);
-            text-shadow: 0 1px 5px black;
         }
     }
 

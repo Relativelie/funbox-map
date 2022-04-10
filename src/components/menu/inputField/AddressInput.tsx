@@ -3,7 +3,7 @@ import { ymaps } from "../../../hooks/ymapsConstant";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-import "./AddressInput.scss"
+import "./AddressInput.scss";
 
 
 interface RefObject<T> {

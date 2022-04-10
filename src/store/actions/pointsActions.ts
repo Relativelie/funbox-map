@@ -10,7 +10,7 @@ export const fetchLongLatitudeBegin = (): PointsAction => ({
     type: PointsActionTypes.FETCH_LONG_LATITUDE_BEGIN
 });
 
-export const fetchLongLatitudeSuccess = (result: any): PointsAction => ({
+export const fetchLongLatitudeSuccess = (result: [number[], string]): PointsAction => ({
     type: PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS,
     longLatitudeValue: result
 });

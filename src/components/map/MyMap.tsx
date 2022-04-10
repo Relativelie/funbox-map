@@ -1,5 +1,6 @@
 
 import { useEffect, useRef, useState } from "react";
+import { DropResult } from "react-beautiful-dnd";
 import { YMaps, Map, Placemark, Polyline } from "react-yandex-maps";
 
 import { useActions } from "../../hooks/useActions";
@@ -43,7 +44,7 @@ export const MyMap = () => {
         {points.map((elem: [number[], string], index: number) => (
           <Placemark
             className="placemark"
-            onDragEnd={(e: any) => changeCoordinates(e, index)}
+            onDragEnd={(e: DropResult) => changeCoordinates(e, index)}
             options={{
               preset: "islands#redDotIcon",
               iconColor: "rgba(145,14,190,0.8954175420168067)",

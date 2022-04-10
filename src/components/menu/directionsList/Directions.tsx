@@ -3,7 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 import { useActions } from "../../../hooks/useActions";
 
-import "./Directions.scss"
+import "./Directions.scss";
 
 
 interface Props {

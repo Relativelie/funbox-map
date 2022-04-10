@@ -1,5 +1,5 @@
 import { KeyboardEvent, useEffect, useRef } from "react";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { ymaps } from "../../hooks/ymapsConstant";
 
 import { useActions } from "../../hooks/useActions";
@@ -18,7 +18,14 @@ import "./Menu.scss";
 export const Menu = () => {
 
     const myRef = useRef<HTMLInputElement>(null);
-    const { checkAddingPoint, fetchLongLatitudeSuccess, pointDragging, fetchLongLatitudeBegin, fetchLongLatitudeFatal, fetchLongLatitudeError } = useActions();
+    const {
+        checkAddingPoint,
+        fetchLongLatitudeSuccess,
+        pointDragging,
+        fetchLongLatitudeBegin,
+        fetchLongLatitudeFatal,
+        fetchLongLatitudeError
+    } = useActions();
     const { points, isCorrectPoint, loading } = useTypedSelector(state => state.points);
 
     useEffect(() => {
@@ -44,14 +51,14 @@ export const Menu = () => {
         }
     };
 
-    const addPointToDirections = async() => {
+    const addPointToDirections = async () => {
         if (myRef.current !== null) {
             fetchLongLatitudeBegin();
-            const result = await getLongLangtitude(myRef.current.value);
+            const result: any = await getLongLangtitude(myRef.current.value);
             if (result === "fatal") {
                 fetchLongLatitudeFatal();
             }
-            else if(result[0] === "error") {
+            else if (result[0] === "error") {
                 fetchLongLatitudeError(result[1])
             }
             else {
@@ -68,11 +75,13 @@ export const Menu = () => {
         }
     };
 
-    const handleOnDragEnd = (result: any) => {
-        if (!result.destination) return;
-        const fromIndex = result.source.index;
-        const toIndex = result.destination.index;
-        pointDragging(fromIndex, toIndex);
+    const handleOnDragEnd = (result: DropResult) => {
+        if (result.destination !== undefined && result.destination !== null) {
+            if (!result.destination) return;
+            const fromIndex = result.source.index;
+            const toIndex = result.destination.index;
+            pointDragging(fromIndex, toIndex);
+        }
     }
 
 
@@ -83,9 +92,9 @@ export const Menu = () => {
                 {checkLoadingProcess()}
             </div>
 
-            <DragDropContext onDragEnd={(e: any) => handleOnDragEnd(e)}>
+            <DragDropContext onDragEnd={(e) => handleOnDragEnd(e)}>
                 <Droppable droppableId="group" type="group">
-                    {(provided: any) => (
+                    {(provided) => (
                         <div {...provided.droppableProps} ref={provided.innerRef}>
                             {points.map((element: [number[], string], index: number) => (
                                 <Directions key={`point-${index}`} index={index} element={element} />

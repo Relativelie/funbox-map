@@ -112,11 +112,13 @@ export const pointsReducer = (state = initialState, action: PointsAction): Point
 
         case PointsActionTypes.DRAG_DROP:
             const allPoints = [...state.points];
-            const pointElement = allPoints.splice(action.fromIndex, 1)[0];
-            allPoints.splice(action.toIndex, 0, pointElement);
             const allRoutes = [...state.routes];
-            const routeElement = allRoutes.splice(action.fromIndex, 1)[0];
-            allRoutes.splice(action.toIndex, 0, routeElement)
+            if (action.fromIndex >= 0 && action.toIndex >= 0) {
+                const pointElement = allPoints.splice(action.fromIndex, 1)[0];
+                allPoints.splice(action.toIndex, 0, pointElement);
+                const routeElement = allRoutes.splice(action.fromIndex, 1)[0];
+                allRoutes.splice(action.toIndex, 0, routeElement)
+            }
             return {
                 ...state,
                 points: allPoints,
