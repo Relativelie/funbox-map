@@ -11,7 +11,8 @@ interface Configuration extends WebpackConfiguration {
 const config: Configuration = {
     mode: "development",
     output: {
-        publicPath: "/",
+        filename: 'bundle.js',
+        path: path.join(__dirname, 'dist'),
     },
     entry: "./src/index.tsx",
     module: {
