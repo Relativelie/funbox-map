@@ -1,8 +1,5 @@
-import "./Loading.scss"
+import './Loading.scss';
 
-
-export const Loading = () => {
-    return (
-        <div className="loadingSpinner"></div>
-    )
-}
+export const Loading = () => (
+    <div className="loadingSpinner" />
+);

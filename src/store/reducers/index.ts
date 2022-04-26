@@ -1,14 +1,12 @@
-import {combineReducers} from "redux";
-import { pointsReducer } from "./pointsReducer";
-
+import { combineReducers } from 'redux';
+import { pointsReducer } from './pointsReducer';
 
 export const reducers = {
-    points: pointsReducer
-}
-
+    points: pointsReducer,
+};
 
 export const rootReducer = combineReducers(
-    reducers
-)
+    reducers,
+);
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;

@@ -1,22 +1,19 @@
-import { KeyboardEvent, useEffect, useRef } from "react";
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { ymaps } from "../../hooks/ymapsConstant";
+import { KeyboardEvent, useEffect, useRef } from 'react';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { ymaps } from '../../hooks/ymapsConstant';
 
-import { useActions } from "../../hooks/useActions";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-import { getLongLangtitude } from "../../requests/getLongLangtitude";
+import { getLongLangtitude } from '../../requests/getLongLangtitude';
 
-import { Loading } from "./loadingSpinner/Loading";
-import { AddressInput } from "./inputField/AddressInput";
-import { Directions } from "./directionsList/Directions";
+import { Loading } from './loadingSpinner/Loading';
+import { AddressInput } from './inputField/AddressInput';
+import { Directions } from './directionsList/Directions';
 
-import "./Menu.scss";
-
-
+import './Menu.scss';
 
 export const Menu = () => {
-
     const myRef = useRef<HTMLInputElement>(null);
     const {
         checkAddingPoint,
@@ -24,46 +21,42 @@ export const Menu = () => {
         pointDragging,
         fetchLongLatitudeBegin,
         fetchLongLatitudeFatal,
-        fetchLongLatitudeError
+        fetchLongLatitudeError,
     } = useActions();
-    const { points, isCorrectPoint, loading } = useTypedSelector(state => state.points);
+    const { points, isCorrectPoint, loading } = useTypedSelector((state) => state.points);
 
     useEffect(() => {
+        const addPointToDirections = async () => {
+            if (myRef.current !== null) {
+                fetchLongLatitudeBegin();
+                const result: any = await getLongLangtitude(myRef.current.value);
+                if (result === 'fatal') {
+                    fetchLongLatitudeFatal();
+                } else if (result[0] === 'error') {
+                    fetchLongLatitudeError(result[1]);
+                } else {
+                    fetchLongLatitudeSuccess(result);
+                }
+            }
+        };
+
         if (isCorrectPoint) {
             addPointToDirections();
             if (myRef.current !== null) {
-                myRef.current.value = "";
+                myRef.current.value = '';
             }
         }
     }, [isCorrectPoint]);
 
-
     const pointVerify = async (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && myRef.current !== null) {
+        if (e.key === 'Enter' && myRef.current !== null) {
             const request = await ymaps.geocode(myRef.current.value);
             const result = await request.geoObjects.get(0);
 
             if (result) {
                 const currentCase = result.properties.get('metaDataProperty.GeocoderMetaData.precision');
                 checkAddingPoint(currentCase);
-            }
-            else checkAddingPoint("other");
-        }
-    };
-
-    const addPointToDirections = async () => {
-        if (myRef.current !== null) {
-            fetchLongLatitudeBegin();
-            const result: any = await getLongLangtitude(myRef.current.value);
-            if (result === "fatal") {
-                fetchLongLatitudeFatal();
-            }
-            else if (result[0] === "error") {
-                fetchLongLatitudeError(result[1])
-            }
-            else {
-                fetchLongLatitudeSuccess(result)
-            }
+            } else checkAddingPoint('other');
         }
     };
 
@@ -71,7 +64,7 @@ export const Menu = () => {
         if (loading) {
             return (
                 <Loading />
-            )
+            );
         }
     };
 
@@ -82,8 +75,7 @@ export const Menu = () => {
             const toIndex = result.destination.index;
             pointDragging(fromIndex, toIndex);
         }
-    }
-
+    };
 
     return (
         <div className="menuContainer">
@@ -105,5 +97,5 @@ export const Menu = () => {
                 </Droppable>
             </DragDropContext>
         </div>
-    )
-}
+    );
+};

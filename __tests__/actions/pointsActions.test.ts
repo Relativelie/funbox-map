@@ -47,7 +47,7 @@ describe("points action creators", () => {
         });
     });
     
-    test("action to drag and drop point", () => {
+    test("action to drag and drop point - point dragging", () => {
         expect(pointDragging(3, 4)).toEqual({
             type: PointsActionTypes.DRAG_DROP,
             fromIndex: 3,
@@ -55,7 +55,7 @@ describe("points action creators", () => {
         });
     });
     
-    test("action to drag and drop point", () => {
+    test("action to drag and drop point - change point coordinates", () => {
         const index = 1;
         const coordinates = [55.83446264982311, 49.15107729101557];
         const destinationName = 'Россия, Республика Татарстан, Казань, Ново-Савиновский район, 27-й квартал';

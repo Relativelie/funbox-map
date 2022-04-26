@@ -1,32 +1,33 @@
-import path from "path";
-import { Configuration as WebpackConfiguration, HotModuleReplacementPlugin, ProvidePlugin } from "webpack";
+import path from 'path';
+import { Configuration as WebpackConfiguration, ProvidePlugin } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import DotenvWebpackPlugin from "dotenv-webpack";
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import DotenvWebpackPlugin from 'dotenv-webpack';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 interface Configuration extends WebpackConfiguration {
     devServer?: WebpackDevServerConfiguration;
 }
 
 const config: Configuration = {
-    mode: "development",
+    mode: 'development',
     output: {
         filename: 'bundle.js',
         path: path.join(__dirname, 'dist'),
     },
-    entry: "./src/index.tsx",
+    entry: './src/index.tsx',
     module: {
         rules: [
             {
                 test: /\.(ts|js)x?$/i,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader",
+                    loader: 'babel-loader',
                     options: {
                         presets: [
-                            "@babel/preset-env",
-                            "@babel/preset-react",
-                            "@babel/preset-typescript",
+                            '@babel/preset-env',
+                            '@babel/preset-react',
+                            '@babel/preset-typescript',
                         ],
                     },
                 },
@@ -36,36 +37,36 @@ const config: Configuration = {
                 test: /\.s[ac]ss$/i,
                 use: [
                     // Creates `style` nodes from JS strings
-                    "style-loader",
+                    'style-loader',
                     // Translates CSS into CommonJS
-                    "css-loader",
+                    'css-loader',
                     // Compiles Sass to CSS
-                    "sass-loader",
+                    'sass-loader',
                 ],
             },
         ],
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"],
+        extensions: ['.tsx', '.ts', '.js'],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./public/index.html",
+            template: './public/index.html',
         }),
-        new HotModuleReplacementPlugin(),
         new ProvidePlugin({
-            "React": "react",
+            React: 'react',
         }),
         new DotenvWebpackPlugin({
-            defaults: true
-        })
+            defaults: true,
+        }),
+        new CleanWebpackPlugin(),
     ],
-    devtool: "inline-source-map",
+    devtool: 'inline-source-map',
     devServer: {
-        static: path.join(__dirname, "build"),
+        static: path.join(__dirname, 'build'),
         historyApiFallback: true,
         port: 4001,
-        open: true
+        open: true,
     },
 };
 

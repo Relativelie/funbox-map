@@ -1,1 +1,1 @@
-export const ymaps = window.ymaps;
+export const { ymaps } = window;
