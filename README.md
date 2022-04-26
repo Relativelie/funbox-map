@@ -1,6 +1,8 @@
 # Map using yandex.maps api
 On this map, you can add your destinations, move and delete points on the map and in the menu
 
+Online demo: https://relativelie.github.io/funbox-map/
+
 Used: 
 - typescript
 - react
