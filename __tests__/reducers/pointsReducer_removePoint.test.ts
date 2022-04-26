@@ -1,4 +1,4 @@
-import { removePoint } from "../../src/store/actions/pointsActions";
+import { RemovePoint } from "../../src/store/actions/pointsActions";
 import { pointsReducer } from "../../src/store/reducers/pointsReducer";
 import { PointsState } from "../../src/types/pointsTypes";
 
@@ -53,7 +53,7 @@ describe("points reducer - remove point", () => {
 
     // Positive tests.
     test("remove an existing point/route from a non-empty array of points/routes", () => {
-        const newState = pointsReducer(stateFullPointsRouts, removePoint(1));
+        const newState = pointsReducer(stateFullPointsRouts, RemovePoint(1));
         expect(newState).toStrictEqual({
             ...stateFullPointsRouts,
             points: [
@@ -65,7 +65,7 @@ describe("points reducer - remove point", () => {
     });
 
     test("remove a non-existent point/route from a non-empty array of points/routes", () => {
-        const newState = pointsReducer(stateFullPointsRouts, removePoint(5));
+        const newState = pointsReducer(stateFullPointsRouts, RemovePoint(5));
 
         expect(newState).toStrictEqual({
             ...stateFullPointsRouts,
@@ -79,18 +79,18 @@ describe("points reducer - remove point", () => {
     });
 
     test("remove a point/route from an array of points/routes with one point", () => {
-        const newState = pointsReducer(stateOnePoint, removePoint(0));
+        const newState = pointsReducer(stateOnePoint, RemovePoint(0));
         expect(newState).toStrictEqual(stateEmptyPointsRouts);
     });
 
     // Negative tests.
     test("remove a point/route from an empty array of points/routes", () => {
-        const newState = pointsReducer(stateEmptyPointsRouts, removePoint(5));
+        const newState = pointsReducer(stateEmptyPointsRouts, RemovePoint(5));
         expect(newState).toStrictEqual(stateEmptyPointsRouts);
     });
 
     test("a negative number is passed as an index", () => {
-        const newState = pointsReducer(stateFullPointsRouts, removePoint(-1));
+        const newState = pointsReducer(stateFullPointsRouts, RemovePoint(-1));
         expect(newState).toStrictEqual({
             ...stateFullPointsRouts,
             points: [

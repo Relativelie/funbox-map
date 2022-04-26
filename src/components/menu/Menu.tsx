@@ -16,26 +16,26 @@ import './Menu.scss';
 export const Menu = () => {
     const myRef = useRef<HTMLInputElement>(null);
     const {
-        checkAddingPoint,
-        fetchLongLatitudeSuccess,
-        pointDragging,
-        fetchLongLatitudeBegin,
-        fetchLongLatitudeFatal,
-        fetchLongLatitudeError,
+        CheckAddingPoint,
+        FetchLongLatitudeSuccess,
+        PointDragging,
+        FetchLongLatitudeBegin,
+        FetchLongLatitudeFatal,
+        FetchLongLatitudeError,
     } = useActions();
     const { points, isCorrectPoint, loading } = useTypedSelector((state) => state.points);
 
     useEffect(() => {
         const addPointToDirections = async () => {
             if (myRef.current !== null) {
-                fetchLongLatitudeBegin();
+                FetchLongLatitudeBegin();
                 const result: any = await getLongLangtitude(myRef.current.value);
                 if (result === 'fatal') {
-                    fetchLongLatitudeFatal();
+                    FetchLongLatitudeFatal();
                 } else if (result[0] === 'error') {
-                    fetchLongLatitudeError(result[1]);
+                    FetchLongLatitudeError(result[1]);
                 } else {
-                    fetchLongLatitudeSuccess(result);
+                    FetchLongLatitudeSuccess(result);
                 }
             }
         };
@@ -55,8 +55,8 @@ export const Menu = () => {
 
             if (result) {
                 const currentCase = result.properties.get('metaDataProperty.GeocoderMetaData.precision');
-                checkAddingPoint(currentCase);
-            } else checkAddingPoint('other');
+                CheckAddingPoint(currentCase);
+            } else CheckAddingPoint('other');
         }
     };
 
@@ -73,7 +73,7 @@ export const Menu = () => {
             if (!result.destination) return;
             const fromIndex = result.source.index;
             const toIndex = result.destination.index;
-            pointDragging(fromIndex, toIndex);
+            PointDragging(fromIndex, toIndex);
         }
     };
 

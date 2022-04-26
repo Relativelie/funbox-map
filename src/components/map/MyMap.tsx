@@ -15,7 +15,7 @@ export const MyMap = () => {
     const { points, routes, isFetchFatal } = useTypedSelector(
         (state) => state.points,
     );
-    const { changePointCoordinates } = useActions();
+    const { ChangePointCoordinates } = useActions();
     const [myCenter, setMyCenter] = useState({ center: [55.75, 37.57], zoom: 9 });
     const mapRef: any = useRef(null);
 
@@ -31,7 +31,7 @@ export const MyMap = () => {
             coordinates[1],
             coordinates[0],
         ]);
-        changePointCoordinates(key, coordinates, destinationName[1]);
+        ChangePointCoordinates(key, coordinates, destinationName[1]);
     };
 
     return (

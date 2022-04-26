@@ -34,6 +34,8 @@
         "consistent-return": "off",
         "react/jsx-props-no-spreading": "off",
         "react/jsx-indent-props": "off",
-        "react/no-array-index-key": "off"
+        "react/no-array-index-key": "off",
+        "@typescript-eslint/default-param-last": "off",
+        "no-case-declarations": "off"
     }
 }

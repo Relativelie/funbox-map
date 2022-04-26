@@ -1,4 +1,4 @@
-import { pointDragging } from "../../src/store/actions/pointsActions";
+import { PointDragging } from "../../src/store/actions/pointsActions";
 import { pointsReducer } from "../../src/store/reducers/pointsReducer";
 import { PointsState } from "../../src/types/pointsTypes";
 
@@ -24,7 +24,7 @@ beforeEach(() => {
 
 describe("points reducer - drag and drop point", () => {
     test("dragging point to_index<from_index ", () => {
-        const newState = pointsReducer(stateFullPointsRouts, pointDragging(0, 1));
+        const newState = pointsReducer(stateFullPointsRouts, PointDragging(0, 1));
         expect(newState).toStrictEqual({
             ...stateFullPointsRouts,
             points: [
@@ -37,7 +37,7 @@ describe("points reducer - drag and drop point", () => {
     });
 
     test("dragging point to_index>from_index ", () => {
-        const newState = pointsReducer(stateFullPointsRouts, pointDragging(2, 0));
+        const newState = pointsReducer(stateFullPointsRouts, PointDragging(2, 0));
         expect(newState).toStrictEqual({
             ...stateFullPointsRouts,
             points: [
@@ -50,7 +50,7 @@ describe("points reducer - drag and drop point", () => {
     });
 
     test("dragging point to_index===from_index ", () => {
-        const newState = pointsReducer(stateFullPointsRouts, pointDragging(2, 2));
+        const newState = pointsReducer(stateFullPointsRouts, PointDragging(2, 2));
         expect(newState).toStrictEqual({
             ...stateFullPointsRouts,
         });

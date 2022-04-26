@@ -11,11 +11,11 @@ interface Props {
 }
 
 export const Directions: FC<Props> = ({ element, index }) => {
-    const { removePoint } = useActions();
+    const { RemovePoint } = useActions();
 
     const removeDirection = (e: MouseEvent<HTMLButtonElement>): void => {
         const { key } = (e.target as HTMLButtonElement).dataset;
-        if (key !== undefined) removePoint(parseInt(key, 10));
+        if (key !== undefined) RemovePoint(parseInt(key, 10));
     };
 
     return (

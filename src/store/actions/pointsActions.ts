@@ -1,42 +1,42 @@
 import { PointsAction, PointsActionTypes } from '../../types/pointsTypes';
 
-export const checkAddingPoint = (e: string): PointsAction => ({
+export const CheckAddingPoint = (e: string): PointsAction => ({
     type: PointsActionTypes.CHECK_ADDING_POINT,
     checkingResult: e,
 });
 
-export const fetchLongLatitudeBegin = (): PointsAction => ({
+export const FetchLongLatitudeBegin = (): PointsAction => ({
     type: PointsActionTypes.FETCH_LONG_LATITUDE_BEGIN,
 });
 
-export const fetchLongLatitudeSuccess = (
+export const FetchLongLatitudeSuccess = (
     result: [number[], string],
 ): PointsAction => ({
     type: PointsActionTypes.FETCH_LONG_LATITUDE_SUCCESS,
     longLatitudeValue: result,
 });
 
-export const fetchLongLatitudeFatal = (): PointsAction => ({
+export const FetchLongLatitudeFatal = (): PointsAction => ({
     type: PointsActionTypes.FETCH_LONG_LATITUDE_FATAL,
 });
 
-export const fetchLongLatitudeError = (errorCode: number): PointsAction => ({
+export const FetchLongLatitudeError = (errorCode: number): PointsAction => ({
     type: PointsActionTypes.FETCH_LONG_LATITUDE_ERROR,
     errorCode,
 });
 
-export const removePoint = (pointKey: number): PointsAction => ({
+export const RemovePoint = (pointKey: number): PointsAction => ({
     type: PointsActionTypes.REMOVE_POINT,
     indexToBeRemoved: pointKey,
 });
 
-export const pointDragging = (from: number, to: number): PointsAction => ({
+export const PointDragging = (from: number, to: number): PointsAction => ({
     type: PointsActionTypes.DRAG_DROP,
     fromIndex: from,
     toIndex: to,
 });
 
-export const changePointCoordinates = (
+export const ChangePointCoordinates = (
     pointKey: number,
     coordinatesValue: Array<number>,
     destinationName: string,

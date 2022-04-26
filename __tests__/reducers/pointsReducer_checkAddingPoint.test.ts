@@ -1,4 +1,4 @@
-import { checkAddingPoint } from "../../src/store/actions/pointsActions";
+import { CheckAddingPoint } from "../../src/store/actions/pointsActions";
 import { pointsReducer } from "../../src/store/reducers/pointsReducer";
 import { wrongPointNameErrors } from "../../src/store/reducers/wrongPointNameErrors";
 import { PointsState } from "../../src/types/pointsTypes";
@@ -27,32 +27,32 @@ beforeEach(() => {
 describe("points reducer - check adding point name", () => {
     // Positive tests.
     test("checking result === 'exact'", () => {
-        const newState = pointsReducer(stateFullPointsRouts, checkAddingPoint("exact"));
+        const newState = pointsReducer(stateFullPointsRouts, CheckAddingPoint("exact"));
         expect(newState).toStrictEqual({ ...stateFullPointsRouts, isCorrectPoint: true })
     });
 
     test("checking result === 'number'", () => {
-        const newState = pointsReducer(stateFullPointsRouts, checkAddingPoint("number"));
+        const newState = pointsReducer(stateFullPointsRouts, CheckAddingPoint("number"));
         expect(newState).toStrictEqual({ ...stateFullPointsRouts, wrongPointError: wrongPointNameErrors.numberNearRange })
     });
 
     test("checking result === 'near'", () => {
-        const newState = pointsReducer(stateFullPointsRouts, checkAddingPoint("near"));
+        const newState = pointsReducer(stateFullPointsRouts, CheckAddingPoint("near"));
         expect(newState).toStrictEqual({ ...stateFullPointsRouts, wrongPointError: wrongPointNameErrors.numberNearRange })
     });
 
     test("checking result === 'range'", () => {
-        const newState = pointsReducer(stateFullPointsRouts, checkAddingPoint("range"));
+        const newState = pointsReducer(stateFullPointsRouts, CheckAddingPoint("range"));
         expect(newState).toStrictEqual({ ...stateFullPointsRouts, wrongPointError: wrongPointNameErrors.numberNearRange })
     });
 
     test("checking result === 'street'", () => {
-        const newState = pointsReducer(stateFullPointsRouts, checkAddingPoint("street"));
+        const newState = pointsReducer(stateFullPointsRouts, CheckAddingPoint("street"));
         expect(newState).toStrictEqual({ ...stateFullPointsRouts, wrongPointError: wrongPointNameErrors.street })
     });
 
     test("checking result === 'other'", () => {
-        const newState = pointsReducer(stateFullPointsRouts, checkAddingPoint("blabla"));
+        const newState = pointsReducer(stateFullPointsRouts, CheckAddingPoint("blabla"));
         expect(newState).toStrictEqual({ ...stateFullPointsRouts, wrongPointError: "" })
     });
 })

@@ -1,4 +1,4 @@
-import { changePointCoordinates } from "../../src/store/actions/pointsActions";
+import { ChangePointCoordinates } from "../../src/store/actions/pointsActions";
 import { pointsReducer } from "../../src/store/reducers/pointsReducer";
 import { PointsState } from "../../src/types/pointsTypes";
 
@@ -38,7 +38,7 @@ describe("point reducer - change coordinates", () => {
 
     test("change coordinates of an existing point/route", () => {
         const newState = pointsReducer(stateFullPointsRouts,
-            changePointCoordinates(
+            ChangePointCoordinates(
                 0,
                 [55.83446264982311, 49.15107729101557],
                 'Россия, Республика Татарстан, Казань, Ново-Савиновский район, 27-й квартал')
@@ -57,7 +57,7 @@ describe("point reducer - change coordinates", () => {
 
     test("change coordinates of a non-existent point/route", () => {
         const newState = pointsReducer(stateFullPointsRouts,
-            changePointCoordinates(
+            ChangePointCoordinates(
                 5,
                 [55.83446264982311, 49.15107729101557],
                 'Россия, Республика Татарстан, Казань, Ново-Савиновский район, 27-й квартал')
@@ -77,7 +77,7 @@ describe("point reducer - change coordinates", () => {
 
     test("a negative number is passed as an index", () => {
         const newState = pointsReducer(stateFullPointsRouts,
-            changePointCoordinates(
+            ChangePointCoordinates(
                 -1,
                 [55.83446264982311, 49.15107729101557],
                 'Россия, Республика Татарстан, Казань, Ново-Савиновский район, 27-й квартал')
@@ -97,7 +97,7 @@ describe("point reducer - change coordinates", () => {
 
     test("empty points/routes", () => {
         const newState = pointsReducer(stateEmptyPointsRouts,
-            changePointCoordinates(
+            ChangePointCoordinates(
                 0,
                 [55.83446264982311, 49.15107729101557],
                 'Россия, Республика Татарстан, Казань, Ново-Савиновский район, 27-й квартал')
